@@ -52,4 +52,9 @@ public struct Vector2i
 	{
 		return (x * 73856093) ^ (y * 19349663);
 	}
+
+	public override string ToString()
+	{
+		return "{" + x.ToString() + ", " + y.ToString() + "}";
+	}
 }
