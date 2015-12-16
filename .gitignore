@@ -147,5 +147,5 @@ JwloChess/Library/
 JwloChess/Temp/
 JwloChess/JwloChess.CSharp.csproj
 JwloChess/JwloChess.CSharp.Editor.csproj
-JwloChess/JwloChess.CSharp.Pluginscsproj
+JwloChess/JwloChess.CSharp.Plugins.csproj
 JwloChess/JwloChess.sln
