@@ -145,3 +145,7 @@ $RECYCLE.BIN/
 #############
 JwloChess/Library/
 JwloChess/Temp/
+JwloChess/JwloChess.CSharp.csproj
+JwloChess/JwloChess.CSharp.Editor.csproj
+JwloChess/JwloChess.CSharp.Pluginscsproj
+JwloChess/JwloChess.sln
