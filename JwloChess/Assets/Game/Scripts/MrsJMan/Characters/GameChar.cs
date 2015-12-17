@@ -16,6 +16,7 @@ namespace MrsJMan
 
 		private Vector2 oldPos, newPos;
 		private float posLerp = 0.0f;
+		private float timeTillHatDone = -1.0f;
 
 
 		public Transform MyTr { get; private set; }
@@ -30,6 +31,13 @@ namespace MrsJMan
 			}
 		}
 
+
+		public virtual void StartHat(float time)
+		{
+			timeTillHatDone = time;
+		}
+		protected virtual void OnNearEndHat(float timeLeft) { }
+		protected virtual void OnEndHat() { }
 
 		protected virtual void Start()
 		{
@@ -108,6 +116,20 @@ namespace MrsJMan
 
 				//Update the position of this character.
 				MyTr.position = Vector3.LerpUnclamped(oldPos, newPos, posLerp);
+			}
+
+			//Update the time until the hat effect is done.
+			if (timeTillHatDone > 0.0f)
+			{
+				timeTillHatDone -= Time.deltaTime;
+				if (timeTillHatDone <= 0.0f)
+				{
+					OnEndHat();
+				}
+				else if (timeTillHatDone <= Constants.Instance.HatNearEndTime)
+				{
+					OnNearEndHat(timeTillHatDone);
+				}
 			}
 		}
 		

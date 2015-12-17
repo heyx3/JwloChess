@@ -15,6 +15,11 @@ namespace MrsJMan
 		
 
 		public float AnimFrameLength = 0.15f;
+		public float HatBlinkInterval = 0.15f;
+
+		public Color NormalCol = Color.white,
+					 HatModeCol = Color.blue;
+
 		private float elapsed = 0.0f;
 		private int currentFrame = 0;
 
@@ -60,6 +65,25 @@ namespace MrsJMan
 				currentFrame = (currentFrame + 1) % MaterialsAndArt.Instance.GhostSprites.Length;
 				Spr.sprite = MaterialsAndArt.Instance.GhostSprites[currentFrame];
 			}
+		}
+
+
+		public override void StartHat(float time)
+		{
+			base.StartHat(time);
+
+			Spr.color = HatModeCol;
+		}
+		protected override void OnNearEndHat(float timeLeft)
+		{
+			int currentIncrement = (int)(timeLeft / HatBlinkInterval);
+			Spr.color = (currentIncrement % 2 == 0) ?
+							NormalCol :
+							HatModeCol;
+		}
+		protected override void OnEndHat()
+		{
+			Spr.color = NormalCol;
 		}
 	}
 }

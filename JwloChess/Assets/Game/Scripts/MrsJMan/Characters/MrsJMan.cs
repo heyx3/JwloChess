@@ -14,6 +14,10 @@ namespace MrsJMan
 		
 
 		public float AnimFrameLength = 0.25f;
+		public float HatBlinkInterval = 0.15f;
+
+		public SpriteRenderer HatChildSprite;
+
 		private float elapsed = 0.0f;
 		private int currentFrame = 0;
 
@@ -50,8 +54,14 @@ namespace MrsJMan
 					break;
 
 				case CellContents.Hat:
-					//TODO: Put hat on char.
-					break;
+
+					HatChildSprite.sprite = GameBoard.GetCellObj(cell).Spr.sprite;
+					GameBoard[cell] = CellContents.Nothing;
+
+					StartHat(Constants.Instance.HatUseTime);
+					for (int i = 0; i < Ghost.AllGhosts.Count; ++i)
+						Ghost.AllGhosts[i].StartHat(Constants.Instance.HatUseTime);
+				break;
 
 				case CellContents.Nothing:
 					break;
@@ -95,6 +105,22 @@ namespace MrsJMan
 			}
 			MyTr.localScale = scale;
 			MyTr.eulerAngles = rot;
+		}
+
+		public override void StartHat(float time)
+		{
+			base.StartHat(time);
+
+			HatChildSprite.enabled = true;
+		}
+		protected override void OnNearEndHat(float timeLeft)
+		{
+			int currentIncrement = (int)(timeLeft / HatBlinkInterval);
+			HatChildSprite.enabled = (currentIncrement % 2 == 0);
+		}
+		protected override void OnEndHat()
+		{
+			HatChildSprite.enabled = false;
 		}
 	}
 }

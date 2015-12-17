@@ -7,12 +7,12 @@ namespace MrsJMan
 	[RequireComponent(typeof(SpriteRenderer))]
 	public class CellObj : MonoBehaviour
 	{
-		private SpriteRenderer spr = null;
+		public SpriteRenderer Spr { get; private set; }
 
 
 		void Awake()
 		{
-			spr = GetComponent<SpriteRenderer>();
+			Spr = GetComponent<SpriteRenderer>();
 		}
 
 
@@ -31,11 +31,11 @@ namespace MrsJMan
 					break;
 				case CellContents.Dot:
 					gameObject.SetActive(true);
-					spr.sprite = MaterialsAndArt.Instance.DotSprite;
+					Spr.sprite = MaterialsAndArt.Instance.DotSprite;
 					break;
 				case CellContents.Hat:
 					gameObject.SetActive(true);
-					spr.sprite = MaterialsAndArt.Instance.RandomHatSprite;
+					Spr.sprite = MaterialsAndArt.Instance.RandomHatSprite;
 					break;
 
 				default: throw new NotImplementedException(content.ToString());
@@ -50,41 +50,41 @@ namespace MrsJMan
 			gameObject.SetActive(true);
 
 			if (minX && maxX && minY && maxY)
-				spr.sprite = MaterialsAndArt.Instance.WallSpriteFull;
+				Spr.sprite = MaterialsAndArt.Instance.WallSpriteFull;
 
 			else if (minX && maxX && minY && !maxY)
-				spr.sprite = MaterialsAndArt.Instance.WallSpriteEndMaxY;
+				Spr.sprite = MaterialsAndArt.Instance.WallSpriteEndMaxY;
 			else if (minX && maxX && !minY && maxY)
-				spr.sprite = MaterialsAndArt.Instance.WallSpriteEndMinY;
+				Spr.sprite = MaterialsAndArt.Instance.WallSpriteEndMinY;
 			else if (minX && !maxX && minY && maxY)
-				spr.sprite = MaterialsAndArt.Instance.WallSpriteEndMaxX;
+				Spr.sprite = MaterialsAndArt.Instance.WallSpriteEndMaxX;
 			else if (!minX && maxX && minY && maxY)
-				spr.sprite = MaterialsAndArt.Instance.WallSpriteEndMinX;
+				Spr.sprite = MaterialsAndArt.Instance.WallSpriteEndMinX;
 
 			else if (minX && maxX && !minY && !maxY)
-				spr.sprite = MaterialsAndArt.Instance.WallSpriteEndMinYMaxY;
+				Spr.sprite = MaterialsAndArt.Instance.WallSpriteEndMinYMaxY;
 			else if (minX && !maxX && !minY && maxY)
-				spr.sprite = MaterialsAndArt.Instance.WallSpriteEndMaxXMinY;
+				Spr.sprite = MaterialsAndArt.Instance.WallSpriteEndMaxXMinY;
 			else if (!minX && !maxX && minY && maxY)
-				spr.sprite = MaterialsAndArt.Instance.WallSpriteEndMinXMaxX;
+				Spr.sprite = MaterialsAndArt.Instance.WallSpriteEndMinXMaxX;
 			else if (minX && !maxX && minY && !maxY)
-				spr.sprite = MaterialsAndArt.Instance.WallSpriteEndMaxXY;
+				Spr.sprite = MaterialsAndArt.Instance.WallSpriteEndMaxXY;
 			else if (!minX && maxX && !minY && maxY)
-				spr.sprite = MaterialsAndArt.Instance.WallSpriteEndMinXY;
+				Spr.sprite = MaterialsAndArt.Instance.WallSpriteEndMinXY;
 			else if (!minX && maxX && minY && !maxY)
-				spr.sprite = MaterialsAndArt.Instance.WallSpriteEndMinXMaxY;
+				Spr.sprite = MaterialsAndArt.Instance.WallSpriteEndMinXMaxY;
 
 			else if (minX && !maxX && !minY && !maxY)
-				spr.sprite = MaterialsAndArt.Instance.WallSpriteEndMinYMaxXY;
+				Spr.sprite = MaterialsAndArt.Instance.WallSpriteEndMinYMaxXY;
 			else if (!minX && !maxX && !minY && maxY)
-				spr.sprite = MaterialsAndArt.Instance.WallSpriteEndMinXYMaxX;
+				Spr.sprite = MaterialsAndArt.Instance.WallSpriteEndMinXYMaxX;
 			else if (!minX && !maxX && minY && !maxY)
-				spr.sprite = MaterialsAndArt.Instance.WallSpriteEndMinXMaxXY;
+				Spr.sprite = MaterialsAndArt.Instance.WallSpriteEndMinXMaxXY;
 			else if (!minX && maxX && !minY && !maxY)
-				spr.sprite = MaterialsAndArt.Instance.WallSpriteEndMinXYMaxY;
+				Spr.sprite = MaterialsAndArt.Instance.WallSpriteEndMinXYMaxY;
 
 			else if (!minX && !maxX && !minY && !maxY)
-				spr.sprite = MaterialsAndArt.Instance.WallSpriteEndAll;
+				Spr.sprite = MaterialsAndArt.Instance.WallSpriteEndAll;
 			else throw new InvalidOperationException(minX + ", " + minY + ", " + maxX + ", " + maxY);
 		}
 	}

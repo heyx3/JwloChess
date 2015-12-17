@@ -87,6 +87,8 @@ namespace MrsJMan
 			gameGridObjs[pos.x, pos.y].SetSpriteForWall(isLessX, isMoreX, isLessY, isMoreY);
 		}
 
+		public CellObj GetCellObj(Vector2i pos) { return gameGridObjs[pos.x, pos.y]; }
+
 
 		public int Width { get { return gameGrid.GetLength(0); } }
 		public int Height { get { return gameGrid.GetLength(1); } }
