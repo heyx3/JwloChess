@@ -6,6 +6,9 @@
 /// </summary>
 public struct Vector2i
 {
+	public static Vector2i Zero { get { return new Vector2i(0, 0); } }
+
+
 	public int x, y;
 
 	public static Vector2i operator+(Vector2i lhs, Vector2i rhs)

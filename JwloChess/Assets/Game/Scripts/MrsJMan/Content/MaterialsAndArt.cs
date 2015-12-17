@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class MaterialsAndArt : Singleton<MaterialsAndArt>
 {
-	public Sprite DotSprite;
+	public Sprite DotSprite, ChocolateSprite;
 
 	public Sprite[] HatSprites;
 	public Sprite RandomHatSprite
@@ -35,4 +35,6 @@ public class MaterialsAndArt : Singleton<MaterialsAndArt>
 				  WallSpriteEndMinYMaxXY,
 
 				  WallSpriteEndAll;
+
+	public Sprite[] MrsJManSprites, GhostSprites;
 }
