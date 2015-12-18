@@ -10,7 +10,7 @@ namespace MrsJMan
 		public GameObject MrsJManPrefab, GhostPrefab;
 
 
-		public MrsJMan CreateMrsJMan(Board board, int inputIndex, Vector2i boardPos)
+		public MrsJMan CreateMrsJMan(Board board, Vector2i boardPos)
 		{
 			GameObject go = Instantiate(MrsJManPrefab);
 			go.transform.position = new Vector3((float)boardPos.x + 0.5f,
@@ -19,12 +19,11 @@ namespace MrsJMan
 
 			MrsJMan mjm = go.GetComponent<MrsJMan>();
 			mjm.GameBoard = board;
-			mjm.InputIndex = inputIndex;
 			mjm.Speed = Constants.Instance.MrsJManSpeed;
 
 			return mjm;
 		}
-		public Ghost CreateGhost(Board board, int inputIndex, Vector2i boardPos)
+		public Ghost CreateGhost(Board board, Vector2i boardPos)
 		{
 			GameObject go = Instantiate(GhostPrefab);
 			go.transform.position = new Vector3((float)boardPos.x + 0.5f,
@@ -33,7 +32,6 @@ namespace MrsJMan
 
 			Ghost g = go.GetComponent<Ghost>();
 			g.GameBoard = board;
-			g.InputIndex = inputIndex;
 			g.Speed = Constants.Instance.GhostSpeed;
 
 			return g;

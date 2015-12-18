@@ -9,10 +9,10 @@ namespace MrsJMan
 	{
 		public Board GameBoard;
 
-		public int InputIndex;
-
 		[NonSerialized]
 		public float Speed;
+		
+		protected int InputIndex;
 
 		private Vector2 oldPos, newPos;
 		private float posLerp = 0.0f;

@@ -33,19 +33,19 @@ namespace MrsJMan
 
 			//Spawn one MrsJMan and then some ghosts.
 			int spawned = 0;
-			for (int x = 0; x < SIZE && spawned < 2; ++x)
+			for (int x = 0; x < SIZE && spawned < 3; ++x)
 			{
-				for (int y = 0; y < SIZE && spawned < 2; ++y)
+				for (int y = 0; y < SIZE && spawned < 3; ++y)
 				{
 					if (board[new Vector2i(x, y)] != CellContents.Wall)
 					{
 						if (spawned == 0)
 						{
-							Prefabs.Instance.CreateMrsJMan(board, 0, new Vector2i(x, y));
+							Prefabs.Instance.CreateMrsJMan(board, new Vector2i(x, y));
 						}
 						else
 						{
-							Prefabs.Instance.CreateGhost(board, 2, new Vector2i(x, y));
+							Prefabs.Instance.CreateGhost(board, new Vector2i(x, y));
 						}
 
 						spawned += 1;

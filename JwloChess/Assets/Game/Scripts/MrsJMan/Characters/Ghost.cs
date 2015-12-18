@@ -23,6 +23,8 @@ namespace MrsJMan
 		{
 			AllGhosts.Add(this);
 
+			InputIndex = GameSettings.GhostInput;
+
 			Spr = GetComponent<SpriteRenderer>();
 		}
 		void OnDestroy()

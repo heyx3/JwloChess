@@ -22,6 +22,8 @@ namespace MrsJMan
 			UnityEngine.Assertions.Assert.IsNull(Instance);
 			Instance = this;
 
+			InputIndex = GameSettings.MrsJManInput;
+
 			Spr = GetComponent<SpriteRenderer>();
 		}
 		

@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.SceneManagement;
 
 
 namespace Menu
@@ -7,7 +8,7 @@ namespace Menu
 	{
 		public void OnPlay()
 		{
-			//TODO: Load next scene.
+			SceneManager.LoadScene("ControlSelectionMenu");
 		}
 		public void OnQuit()
 		{
