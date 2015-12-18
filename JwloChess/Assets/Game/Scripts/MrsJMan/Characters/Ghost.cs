@@ -5,7 +5,6 @@ using UnityEngine;
 
 namespace MrsJMan
 {
-	[RequireComponent(typeof(SpriteRenderer))]
 	public class Ghost : GameChar
 	{
 		public static List<Ghost> AllGhosts = new List<Ghost>();
@@ -14,14 +13,10 @@ namespace MrsJMan
 		public SpriteRenderer Spr { get; private set; }
 		
 
-		public float AnimFrameLength = 0.15f;
 		public float HatBlinkInterval = 0.15f;
 
 		public Color NormalCol = Color.white,
 					 HatModeCol = Color.blue;
-
-		private float elapsed = 0.0f;
-		private int currentFrame = 0;
 
 
 		void Awake()
@@ -35,14 +30,6 @@ namespace MrsJMan
 			AllGhosts.Remove(this);
 		}
 
-		protected override void Start()
-		{
-			base.Start();
-			
-			currentFrame = 0;
-			elapsed = 0;
-			Spr.sprite = MaterialsAndArt.Instance.GhostSprites[currentFrame];
-		}
 		protected override void Update()
 		{
 			base.Update();
@@ -54,16 +41,6 @@ namespace MrsJMan
 				(Constants.Instance.GhostHitRadius * Constants.Instance.GhostHitRadius))
 			{
 				//TODO: Kill her.
-			}
-
-			//Update animation frame.
-			elapsed += Time.deltaTime;
-			if (elapsed >= AnimFrameLength)
-			{
-				elapsed -= AnimFrameLength;
-
-				currentFrame = (currentFrame + 1) % MaterialsAndArt.Instance.GhostSprites.Length;
-				Spr.sprite = MaterialsAndArt.Instance.GhostSprites[currentFrame];
 			}
 		}
 

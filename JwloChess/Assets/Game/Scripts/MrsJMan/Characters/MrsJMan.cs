@@ -13,13 +13,8 @@ namespace MrsJMan
 		public SpriteRenderer Spr { get; private set; }
 		
 
-		public float AnimFrameLength = 0.25f;
 		public float HatBlinkInterval = 0.15f;
-
 		public SpriteRenderer HatChildSprite;
-
-		private float elapsed = 0.0f;
-		private int currentFrame = 0;
 
 
 		void Awake()
@@ -29,16 +24,7 @@ namespace MrsJMan
 
 			Spr = GetComponent<SpriteRenderer>();
 		}
-		protected override void Start()
-		{
-			base.Start();
-			
-			currentFrame = 0;
-			elapsed = 0;
-			Spr.sprite = MaterialsAndArt.Instance.MrsJManSprites[currentFrame];
-		}
 		
-
 		protected override void OnEnteredCell(Vector2i cell)
 		{
 			CellContents inCell = GameBoard[cell];
@@ -72,16 +58,6 @@ namespace MrsJMan
 		protected override void Update()
 		{
 			base.Update();
-
-			//Update animation frame.
-			elapsed += Time.deltaTime;
-			if (elapsed >= AnimFrameLength)
-			{
-				elapsed -= AnimFrameLength;
-
-				currentFrame = (currentFrame + 1) % MaterialsAndArt.Instance.MrsJManSprites.Length;
-				Spr.sprite = MaterialsAndArt.Instance.MrsJManSprites[currentFrame];
-			}
 
 			//Scale/Rotate animation to match direction.
 			Vector3 scale = MyTr.localScale;
