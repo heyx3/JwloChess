@@ -26,7 +26,12 @@ namespace MrsJMan
 
 			Spr = GetComponent<SpriteRenderer>();
 		}
-		
+
+		protected override bool CanEnterCell(Vector2i cell)
+		{
+			return !GameBoard.IsInGhostHome(cell);
+		}
+
 		protected override void OnEnteredCell(Vector2i cell)
 		{
 			CellContents inCell = GameBoard[cell];

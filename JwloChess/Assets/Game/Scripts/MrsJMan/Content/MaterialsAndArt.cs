@@ -6,6 +6,8 @@ public class MaterialsAndArt : Singleton<MaterialsAndArt>
 {
 	public Sprite DotSprite, ChocolateSprite;
 
+	public Sprite GhostHome;
+
 	public Sprite[] HatSprites;
 	public Sprite RandomHatSprite
 	{
@@ -36,5 +38,6 @@ public class MaterialsAndArt : Singleton<MaterialsAndArt>
 
 				  WallSpriteEndAll;
 
-	public Sprite[] MrsJManSprites, GhostSprites;
+
+	public Sprite[] MrsJManSprites, GhostSprites, GhostEyeSprites;
 }

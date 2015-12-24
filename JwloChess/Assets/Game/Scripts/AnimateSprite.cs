@@ -35,4 +35,12 @@ public class AnimateSprite : MonoBehaviour
 			spr.sprite = SpriteList[CurrentFrame];
 		}
 	}
+
+
+	public void Reset()
+	{
+		CurrentFrame = 0;
+		elapsedTime = 0.0f;
+		spr.sprite = SpriteList[CurrentFrame];
+	}
 }

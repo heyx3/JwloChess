@@ -76,6 +76,7 @@ namespace MrsJMan
 					Vector2i newPosI = new Vector2i((int)newPos.x,
 													(int)newPos.y);
 
+					OnEnteredCell(newPosI);
 
 					//If the player is pushing towards an open direction, use that.
 					if (input.x < 0 && CanMoveTo(newPosI.LessX))
@@ -109,9 +110,6 @@ namespace MrsJMan
 						oldPos = newPos;
 						newPos += moveDelta;
 					}
-
-					OnEnteredCell(new Vector2i((int)oldPos.x,
-											   (int)oldPos.y));
 				}
 
 				//Update the position of this character.
@@ -136,7 +134,7 @@ namespace MrsJMan
 		
 		private bool CanMoveTo(Vector2i pos)
 		{
-			return GameBoard.IsValidPos(pos) && GameBoard[pos] != CellContents.Wall;
+			return GameBoard.IsValidPos(pos) && GameBoard[pos] != CellContents.Wall && CanEnterCell(pos);
 		}
 	
 		private List<Vector2i> moveOptions = new List<Vector2i>(4);
@@ -172,6 +170,7 @@ namespace MrsJMan
 		}
 
 
+		protected virtual bool CanEnterCell(Vector2i cell) { return true; }
 		protected virtual void OnEnteredCell(Vector2i cell) { }
 	}
 }

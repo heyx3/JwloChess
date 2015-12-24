@@ -36,4 +36,12 @@ public class AnimateImage: MonoBehaviour
 			img.sprite = SpriteList[CurrentFrame];
 		}
 	}
+
+
+	public void Reset()
+	{
+		elapsedTime = 0.0f;
+		CurrentFrame = 0;
+		img.sprite = SpriteList[CurrentFrame];
+	}
 }

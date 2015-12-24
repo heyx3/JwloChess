@@ -6,6 +6,11 @@ namespace MrsJMan
 {
 	public class Board
 	{
+		public Vector2i GhostHomeMin, GhostHomeMax;
+
+		public event UnityEngine.Events.UnityAction<GameChar> OnGameWon;
+
+
 		private CellContents[,] gameGrid = null;
 		private CellObj[,] gameGridObjs;
 
@@ -103,6 +108,12 @@ namespace MrsJMan
 				   pos.y >= 0 && pos.y < Height;
 		}
 
+		public bool IsInGhostHome(Vector2i pos)
+		{
+			return pos.x >= GhostHomeMin.x && pos.x <= GhostHomeMax.x &&
+				   pos.y >= GhostHomeMin.y && pos.y <= GhostHomeMax.y;
+		}
+
 		public void Reset(Vector2i size, CellContents fillVal = CellContents.Nothing)
 		{
 			NumberOfDots = 0;
@@ -133,6 +144,14 @@ namespace MrsJMan
 
 			CellObj co = go.AddComponent<CellObj>();
 			return co;
+		}
+
+		public void WinGame(GameChar winner)
+		{
+			if (OnGameWon != null)
+			{
+				OnGameWon(winner);
+			}
 		}
 	}
 }
