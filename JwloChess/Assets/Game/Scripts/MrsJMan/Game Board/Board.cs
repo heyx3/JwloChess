@@ -7,6 +7,7 @@ namespace MrsJMan
 	public class Board
 	{
 		public Vector2i GhostHomeMin, GhostHomeMax;
+		public Transform GameObjsParent = null;
 
 		public event UnityEngine.Events.UnityAction<GameChar> OnGameWon;
 
@@ -132,6 +133,8 @@ namespace MrsJMan
 				{
 					gameGridObjs[v.x, v.y] = CreateCell(v);
 					this[v] = fillVal;
+
+					gameGridObjs[v.x, v.y].transform.parent = GameObjsParent;
 				}
 			}
 		}

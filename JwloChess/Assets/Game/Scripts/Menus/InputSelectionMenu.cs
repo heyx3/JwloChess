@@ -9,8 +9,10 @@ namespace Menu
 	public class InputSelectionMenu : MonoBehaviour
 	{
 		public Text TitleText;
+		public float WaitTimeBetweenPlayers = 1.0f;
 
-		private bool findingMrsJ;
+		private bool findingMrsJ = true;
+		private float timeTillAllowed = -1.0f;
 
 
 		void Start()
@@ -19,20 +21,28 @@ namespace Menu
 		}
 		void Update()
 		{
-			int input = InputManager.Instance.GetFirstUsedInput();
-			if (input != -1)
+			if (timeTillAllowed <= 0.0f)
 			{
-				if (findingMrsJ)
+				int input = InputManager.Instance.GetFirstUsedInput();
+				if (input != -1)
 				{
-					MrsJMan.GameSettings.MrsJManInput = input;
-					findingMrsJ = false;
-					TitleText.text = "Press a control key for: Ghost";
+					if (findingMrsJ)
+					{
+						MrsJMan.GameSettings.MrsJManInput = input;
+						findingMrsJ = false;
+						TitleText.text = "Press a control key for: Ghost";
+						timeTillAllowed = WaitTimeBetweenPlayers;
+					}
+					else
+					{
+						MrsJMan.GameSettings.GhostInput = input;
+						UnityEngine.SceneManagement.SceneManager.LoadScene("LevelSelectionMenu");
+					}
 				}
-				else
-				{
-					MrsJMan.GameSettings.GhostInput = input;
-					UnityEngine.SceneManagement.SceneManager.LoadScene("LevelSelectionMenu");
-				}
+			}
+			else
+			{
+				timeTillAllowed -= Time.deltaTime;
 			}
 		}
 	}

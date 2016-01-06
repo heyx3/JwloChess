@@ -26,6 +26,10 @@ namespace MrsJMan
 
 			Spr = GetComponent<SpriteRenderer>();
 		}
+		void OnDestroy()
+		{
+			Instance = null;
+		}
 
 		protected override bool CanEnterCell(Vector2i cell)
 		{
