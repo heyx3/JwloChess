@@ -252,9 +252,6 @@ namespace LevelGen
 				dat.GhostStarts.Add(FindEmptySpaceNear(searchPos, dat.GameBoard, isValidSpawn));
 			}
 
-			dat.MrsJManStart = new Vector2i(1, 1);
-			return dat;
-
 			if (mirrorY)
 			{
 				dat.GameBoard[hatPos1.x, dat.GameBoard.GetLength(1) - 1 - hatPos1.y] = CellContents.Hat;

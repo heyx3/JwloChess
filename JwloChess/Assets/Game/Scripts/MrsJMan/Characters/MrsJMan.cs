@@ -43,11 +43,8 @@ namespace MrsJMan
 			switch (inCell)
 			{
 				case CellContents.Dot:
+					//Number of dots left is automatically tracked by the game board.
 					GameBoard[cell] = CellContents.Nothing;
-					if (GameBoard.NumberOfDots <= 0)
-					{
-						//TODO: MrsJMan won.
-					}
 					break;
 
 				case CellContents.Hat:
@@ -64,6 +61,11 @@ namespace MrsJMan
 					break;
 
 				default: throw new NotImplementedException(inCell.ToString());
+			}
+
+			if (GameBoard.Chocolate.gameObject.activeSelf && cell == GameBoard.ChocolatePos)
+			{
+				GameController.Instance.CollectChocolate();
 			}
 		}
 		protected override void Update()

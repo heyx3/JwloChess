@@ -46,21 +46,24 @@ namespace MrsJMan
 			base.Update();
 
 			//If this ghost is touching the player, either kill her or get eaten by her.
-			Vector2 pos = (Vector2)MyTr.position;
-			Vector2 playerPos = (Vector2)MrsJMan.Instance.MyTr.position;
-			if ((pos - playerPos).sqrMagnitude <
-				(Constants.Instance.GhostHitRadius * Constants.Instance.GhostHitRadius))
+			if (!IsDead)
 			{
-				if (IsInHatMode)
+				Vector2 pos = (Vector2)MyTr.position;
+				Vector2 playerPos = (Vector2)MrsJMan.Instance.MyTr.position;
+				if ((pos - playerPos).sqrMagnitude <
+					(Constants.Instance.GhostHitRadius * Constants.Instance.GhostHitRadius))
 				{
-					IsDead = true;
-					Anim.SpriteList = MaterialsAndArt.Instance.GhostEyeSprites;
-					Anim.Reset();
-					
-				}
-				else
-				{
-					GameBoard.WinGame(this);
+					if (IsInHatMode)
+					{
+						IsDead = true;
+						Anim.SpriteList = MaterialsAndArt.Instance.GhostEyeSprites;
+						Anim.Reset();
+
+					}
+					else
+					{
+						GameController.Instance.KillMrsJMan();
+					}
 				}
 			}
 		}

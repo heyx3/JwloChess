@@ -21,6 +21,7 @@ namespace MrsJMan
 
 
 			board = new Board();
+			board.ChocolateSpawns = LvlDat.ChocolateSpawns;
 			board.GameObjsParent = containerTr;
 			board.Reset(new Vector2i(LvlDat.GameBoard.GetLength(0),
 									 LvlDat.GameBoard.GetLength(1)));

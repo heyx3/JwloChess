@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 
@@ -7,13 +8,24 @@ namespace MrsJMan
 	public class Board
 	{
 		public Vector2i GhostHomeMin, GhostHomeMax;
-		public Transform GameObjsParent = null;
+		public List<Vector2i> ChocolateSpawns;
 
-		public event UnityEngine.Events.UnityAction<GameChar> OnGameWon;
+		public Transform Chocolate = null;
+		public Transform GameObjsParent = null;
 
 
 		private CellContents[,] gameGrid = null;
 		private CellObj[,] gameGridObjs;
+
+
+		public Vector2i ChocolatePos
+		{
+			get
+			{
+				return new Vector2i((int)Chocolate.position.x,
+									(int)Chocolate.position.y);
+			}
+		}
 
 
 		public CellContents this[Vector2i pos]
@@ -117,12 +129,15 @@ namespace MrsJMan
 
 		public void Reset(Vector2i size, CellContents fillVal = CellContents.Nothing)
 		{
-			NumberOfDots = 0;
-
 			if (gameGrid != null)
 				for (int x = 0; x < Width; ++x)
 					for (int y = 0; y < Height; ++y)
 						GameObject.Destroy(gameGridObjs[x, y].gameObject);
+			
+
+			NumberOfDots = (fillVal == CellContents.Dot ?
+								(size.x * size.y) :
+								0);
 
 			gameGrid = new CellContents[size.x, size.y];
 			gameGridObjs = new CellObj[size.x, size.y];
@@ -131,12 +146,23 @@ namespace MrsJMan
 			{
 				for (v.y = 0; v.y < Height; ++v.y)
 				{
+					gameGrid[v.x, v.y] = fillVal;
+
 					gameGridObjs[v.x, v.y] = CreateCell(v);
 					this[v] = fillVal;
 
 					gameGridObjs[v.x, v.y].transform.parent = GameObjsParent;
 				}
 			}
+			
+			if (Chocolate == null)
+			{
+				Chocolate = new GameObject("Chocolate").transform;
+				
+				SpriteRenderer spr = Chocolate.gameObject.AddComponent<SpriteRenderer>();
+				spr.sprite = MaterialsAndArt.Instance.ChocolateSprite;
+			}
+			Chocolate.gameObject.SetActive(false);
 		}
 		private CellObj CreateCell(Vector2i pos)
 		{
@@ -149,12 +175,16 @@ namespace MrsJMan
 			return co;
 		}
 
-		public void WinGame(GameChar winner)
+		public void SpawnChocolate()
 		{
-			if (OnGameWon != null)
-			{
-				OnGameWon(winner);
-			}
+			Vector2i spawn = ChocolateSpawns[UnityEngine.Random.Range(0, ChocolateSpawns.Count)];
+			Chocolate.position = new Vector3(spawn.x + 0.5f, spawn.y + 0.5f, 0.0f);
+
+			Chocolate.gameObject.SetActive(true);
+		}
+		public void DespawnChocolate()
+		{
+			Chocolate.gameObject.SetActive(false);
 		}
 	}
 }
